@@ -22,7 +22,7 @@ public class Length implements Comparable<Length> {
 	@Override
 	public int compareTo(Length o) {
 
-		return Math.round(getAmount() - o.convert(getUnit()).getAmount());
+		return Float.compare(getAmount(), o.convert(unit).amount);
 	}
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class Length implements Comparable<Length> {
 	 */
 	public Length convert(LengthUnit unit) {
 		
-		return new Length((getAmount() * getUnit().value / unit.value), unit);
+		return new Length((amount * this.unit.getValue() / unit.getValue()), unit);
 	}
 	@Override
 	/**
@@ -40,8 +40,11 @@ public class Length implements Comparable<Length> {
 	 * Example: 20M (string expression of Length object designed 20 meters)
 	 */
 	public String toString() {
-		
-		return String.valueOf(Math.round(getAmount())).concat(unit.toString());
+		String amountStr = Float.toString(amount);
+		if (amountStr.matches(".*\\.0+")) {
+			amountStr = amountStr.replaceAll("\\.0+", "");
+		}
+		return amountStr + unit.toString();
 	}
 
 	public float getAmount() {

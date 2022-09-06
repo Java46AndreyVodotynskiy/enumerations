@@ -11,6 +11,8 @@ class LengthTests {
 Length length1 = new Length(1, LengthUnit.KM);
 Length length2 = new Length(500, LengthUnit.M);
 Length l3 = new Length(50000, LengthUnit.CM);
+
+
 	@BeforeEach
 	void setUp() throws Exception {
 	}
